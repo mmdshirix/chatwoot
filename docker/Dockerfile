@@ -18,6 +18,7 @@ ENV RAILS_SERVE_STATIC_FILES ${RAILS_SERVE_STATIC_FILES}
 
 ARG RAILS_ENV=production
 ENV RAILS_ENV ${RAILS_ENV}
+ENV DEFAULT_LOCALE=fa
 
 ARG NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider"
 ENV NODE_OPTIONS ${NODE_OPTIONS}
@@ -86,8 +87,8 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
   && rm -rf spec node_modules tmp/cache; \
   fi
 
-# Generate .git_sha file with current commit hash
-RUN git rev-parse HEAD > /app/.git_sha
+# Generate .git_sha file; fall back to 'unknown' if git metadata is missing
+RUN if [ -d .git ]; then git rev-parse HEAD > /app/.git_sha; else echo "unknown" > /app/.git_sha; fi
 
 # Remove unnecessary files
 RUN rm -rf /gems/ruby/3.4.0/cache/*.gem \
@@ -118,6 +119,7 @@ ENV BUNDLE_FORCE_RUBY_PLATFORM ${BUNDLE_FORCE_RUBY_PLATFORM}
 
 ARG RAILS_ENV=production
 ENV RAILS_ENV ${RAILS_ENV}
+ENV DEFAULT_LOCALE=fa
 ENV BUNDLE_PATH="/gems"
 
 RUN apk update && apk add --no-cache \
@@ -150,3 +152,6 @@ COPY --from=pre-builder /app/.git_sha /app/.git_sha
 WORKDIR /app
 
 EXPOSE 3000
+RUN chmod +x docker/entrypoints/rails.sh
+ENTRYPOINT ["docker/entrypoints/rails.sh"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]

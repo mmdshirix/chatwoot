@@ -13,7 +13,7 @@ By default, it renders:
 %>
 
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>" class="w-full h-full">
+<html lang="<%= I18n.locale %>" dir="<%= %w[ar as fa he ku ur].include?(I18n.locale.to_s) ? 'rtl' : 'ltr' %>" class="w-full h-full">
 <head>
   <meta charset="utf-8">
   <meta name="ROBOTS" content="NOODP">
@@ -24,6 +24,7 @@ By default, it renders:
   <%= render "stylesheet" %>
   <%= vite_client_tag %>
   <%= vite_javascript_tag 'superadmin' %>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body class="antialiased w-full h-full">
