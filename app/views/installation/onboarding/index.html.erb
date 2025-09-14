@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>" dir="<%= %w[ar as fa he ku ur].include?(I18n.locale.to_s) ? 'rtl' : 'ltr' %>">
   <head>
     <title>SuperAdmin | Chatwoot</title>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'superadmin' %>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="h-full w-full antialiased">

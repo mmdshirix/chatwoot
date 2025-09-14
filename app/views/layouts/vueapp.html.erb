@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>" dir="<%= %w[ar as fa he ku ur].include?(I18n.locale.to_s) ? 'rtl' : 'ltr' %>">
   <head>
     <title>
       <%= @global_config['INSTALLATION_NAME'] %>
@@ -29,6 +29,7 @@
       <link rel="manifest" href="/manifest.json">
     <% end %>
     <link rel="icon" type="image/png" sizes="512x512" href="<%= @global_config['LOGO_THUMBNAIL'] %>">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <script>
       window.chatwootConfig = {

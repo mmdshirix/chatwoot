@@ -14,7 +14,7 @@ By default, it renders:
 %>
 
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
+<html lang="<%= I18n.locale %>" dir="<%= %w[ar as fa he ku ur].include?(I18n.locale.to_s) ? 'rtl' : 'ltr' %>">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1">
@@ -23,6 +23,7 @@ By default, it renders:
 
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'portal' %>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       .appearance-menu[data-current-theme="system"] .check-mark-icon:is(.light-theme, .dark-theme),
       .appearance-menu[data-current-theme="dark"] .check-mark-icon:is(.light-theme, .system-theme),

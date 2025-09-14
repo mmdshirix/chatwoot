@@ -18,6 +18,7 @@ ENV RAILS_SERVE_STATIC_FILES ${RAILS_SERVE_STATIC_FILES}
 
 ARG RAILS_ENV=production
 ENV RAILS_ENV ${RAILS_ENV}
+ENV DEFAULT_LOCALE=fa
 
 ARG NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider"
 ENV NODE_OPTIONS ${NODE_OPTIONS}
@@ -87,7 +88,7 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
   fi
 
 # Generate .git_sha file; fall back to 'unknown' if git metadata is missing
-RUN git rev-parse HEAD > /app/.git_sha 2>/dev/null || echo unknown > /app/.git_sha
+RUN if [ -d .git ]; then git rev-parse HEAD > /app/.git_sha; else echo "unknown" > /app/.git_sha; fi
 
 # Remove unnecessary files
 RUN rm -rf /gems/ruby/3.4.0/cache/*.gem \
@@ -118,6 +119,7 @@ ENV BUNDLE_FORCE_RUBY_PLATFORM ${BUNDLE_FORCE_RUBY_PLATFORM}
 
 ARG RAILS_ENV=production
 ENV RAILS_ENV ${RAILS_ENV}
+ENV DEFAULT_LOCALE=fa
 ENV BUNDLE_PATH="/gems"
 
 RUN apk update && apk add --no-cache \
