@@ -118,6 +118,17 @@ Chatwoot now supports 1-Click deployment to DigitalOcean as a kubernetes app.
   <img width="200" alt="Deploy to DO" src="https://www.deploytodo.com/do-btn-blue.svg"/>
 </a>
 
+### Liara Docker deployment
+
+Chatwoot can be deployed to [Liara](https://liara.ir/) using Docker. A sample `liara.json` file is included with Persian as the default locale.
+
+```bash
+docker build -t chatwoot-fa .
+liara deploy
+```
+
+The container runs with `DEFAULT_LOCALE=fa` so the interface is displayed in Persian by default.
+
 ### Other deployment options
 
 For other supported options, checkout our [deployment page](https://chatwoot.com/deploy).

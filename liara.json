@@ -1,0 +1,10 @@
+{
+  "service": "docker",
+  "image": "chatwoot-fa",
+  "port": 3000,
+  "env": {
+    "RAILS_ENV": "production",
+    "NODE_ENV": "production",
+    "DEFAULT_LOCALE": "fa"
+  }
+}
